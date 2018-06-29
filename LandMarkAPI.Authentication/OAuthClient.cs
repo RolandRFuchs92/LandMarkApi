@@ -21,17 +21,17 @@ namespace LandMarkAPI.Authentication
 	    /// Get the client using the OAuthRequest Api
 	    /// </summary>
 	    /// <returns>The initial request client.</returns>
-	    public OAuthRequest GetClient()
+	    public OAuthRequest GetClient(bool isRequestToken = true)
 	    {
 		    var client = new OAuthRequest
 		    {
 			    Method = "GET",
 			    SignatureMethod = OAuthSignatureMethod.HmacSha1,
 			    ConsumerKey = _flickr.ConsumerKey,
-			    ConsumerSecret = _flickr.ConsumerSecret,
-			    RequestUrl = _flickr.RequestTokenUrl,
+			    ConsumerSecret = isRequestToken ? _flickr.ConsumerSecret : null,
+			    RequestUrl = isRequestToken ?  _flickr.RequestTokenUrl : _flickr.AccessTokenUrl,
 			    SignatureTreatment = OAuthSignatureTreatment.Unescaped,
-			    CallbackUrl = "https://localhost:44301/FlickrAuth/OAuthVerifier"
+			    CallbackUrl = isRequestToken ? "https://localhost:44301/FlickrAuth/OAuthVerifier" : null
 		    };
 
 		    return client;
