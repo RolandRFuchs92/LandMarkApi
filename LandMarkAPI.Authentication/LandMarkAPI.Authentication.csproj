@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TinyOAuth1" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LandMarkAPI.Domain\LandMarkAPI.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Options">
+      <HintPath>..\..\..\..\.nuget\packages\microsoft.extensions.options\2.1.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="OAuth.DotNetCore">
+      <HintPath>..\..\..\..\.nuget\packages\oauth.dotnetcore\2.0.0\lib\netstandard2.0\OAuth.DotNetCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
