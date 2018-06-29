@@ -31,5 +31,15 @@ namespace LandMarkAPI.Authentication
 			    TokenSecret = parsedReponse["oauth_token_secret"]
 		    };
 	    }
-	}
+
+	    public string GetRedirectUrl(OAuthToken token, OAuthParamsRequestToken flickr)
+	    {
+		    var redirParts = new[]
+		    {
+				flickr.AuthorizeUrl,
+				$"{flickr.RequestToken.Token}={token.Token}",
+		    };
+		    return string.Join("&",redirParts);
+	    }
+    }
 }

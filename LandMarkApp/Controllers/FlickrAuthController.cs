@@ -29,17 +29,15 @@ namespace LandMarkApp.Controllers
 	    public IActionResult BrowseLandmarks()
 	    {
 		    var token = new RequestOAuthToken(_flickr).GetRequestToken();
-			var redir = new [] {_flickr.AuthorizeUrl, "" };
+		    var redirectUrl = new ParseResponse().GetRedirectUrl(token, _flickr);
 
-			return Redirect(string.Join("&", redir));
+			return Redirect(redirectUrl);
 		}
 
 	    public IActionResult OAuthVerifier(string resp)
 	    {
-
 		    return Json(new {message = "Yay!"});
 	    }
-
 
         public IActionResult Index()
         {
