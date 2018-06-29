@@ -11,7 +11,13 @@ namespace LandMarkAPI.Domain.Models.OAuth
 	{
 		public OAuthParamsRequestToken(IConfiguration iConfiguration)
 		{
-			var data = iConfiguration.GetSection("Flickr").GetChildren().ToDictionary(k => k.Key, v=> v.Value);
+			var flickrBody = iConfiguration.GetSection("Flickr");
+			var data = flickrBody
+				.GetChildren()
+				.ToDictionary(k => k.Key, v => v.Value);
+			var reqToken = ParseTokenBody(flickrBody, "RequestTokenResponse");
+			var authToken = ParseTokenBody(flickrBody, "AuthorizationTokenResponse");
+
 			ConsumerKey = data["ConsumerKey"];
 			ConsumerSecret = data["ConsumerSecret"];
 			RequestUrl = data["RequestUrl"];
@@ -19,14 +25,30 @@ namespace LandMarkAPI.Domain.Models.OAuth
 			RequestTokenUrl = $"{RequestUrl}/{data["RequestToken"]}";
 			AuthorizeUrl = $"{RequestUrl}/{data["Authorize"]}";
 			AccessTokenUrl = $"{RequestUrl}/{data["AccessToken"]}";
+			RequestToken = InitTokenResponse(reqToken);
+			AuthorizationToken = InitTokenResponse(authToken);
 		}
 
 		public string ConsumerKey { get; }
 		public string ConsumerSecret { get; }
 		public string RequestUrl { get; }
-		public string RequestTokenUrl { get; set; }
-		public string AuthorizeUrl { get; set; }
-		public string AccessTokenUrl { get; set; }
+		public string RequestTokenUrl { get;  }
+		public string AuthorizeUrl { get; }
+		public string AccessTokenUrl { get;  }
 		public string Version { get; }
+		public TokenResponse RequestToken { get; }
+		public TokenResponse AuthorizationToken { get; }
+
+		private Dictionary<string, string> ParseTokenBody(IConfigurationSection configurationSection, string section)
+		{
+			return configurationSection.GetSection(section)
+				.GetChildren()
+				.ToDictionary(key => key.Key, val => val.Value);
+		}
+
+		private TokenResponse InitTokenResponse(Dictionary<string, string> token)
+		{
+			return new TokenResponse(token["Token"], token["Secret"]);
+		}
 	}
 }
