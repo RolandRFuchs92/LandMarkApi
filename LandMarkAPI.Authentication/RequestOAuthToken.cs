@@ -13,14 +13,15 @@ namespace LandMarkAPI.Authentication
 {
 	public class RequestOAuthToken
 	{
-		private readonly OAuthParamsRequestToken _flickr;
+		private readonly OAuthClient _client;
+
 		/// <summary>
 		/// Constructor gets the its inforormation from appsettings(after being parsed)
 		/// </summary>
 		/// <param name="flickr"></param>
 		public RequestOAuthToken(OAuthParamsRequestToken flickr)
 		{
-			_flickr = flickr;
+			_client = new OAuthClient(flickr);
 		}
 
 		/// <summary>
@@ -29,28 +30,8 @@ namespace LandMarkAPI.Authentication
 		/// <returns></returns>
 		public OAuthToken GetRequestToken()
 		{
-			var auth = GetClient().GetAuthorizationQuery();
+			var auth = _client.GetClient().GetAuthorizationQuery();
 			return GetAuthResponse(auth);
-		}
-
-		/// <summary>
-		/// Get the client using the OAuthRequest Api
-		/// </summary>
-		/// <returns>The initial request client.</returns>
-		private OAuthRequest GetClient()
-		{
-			var client = new OAuthRequest
-			{
-				Method = "GET",
-				SignatureMethod = OAuthSignatureMethod.HmacSha1,
-				ConsumerKey = _flickr.ConsumerKey,
-				ConsumerSecret = _flickr.ConsumerSecret,
-				RequestUrl = _flickr.RequestTokenUrl,
-				SignatureTreatment = OAuthSignatureTreatment.Unescaped,
-				CallbackUrl = "https://localhost:44301/FlickrAuth/OAuthVerifier"
-			};
-
-			return client;
 		}
 
 		/// <summary>
@@ -60,7 +41,7 @@ namespace LandMarkAPI.Authentication
 		/// <returns></returns>
 		private OAuthToken GetAuthResponse(string auth)
 		{
-			var url = GetClient().RequestUrl + "?" + auth;
+			var url = _client.GetClient().RequestUrl + "?" + auth;
 			var request = (HttpWebRequest)WebRequest.Create(url);
 			var response = (HttpWebResponse)request.GetResponse();
 			var token = new OAuthToken();
@@ -78,7 +59,5 @@ namespace LandMarkAPI.Authentication
 
 			return token;
 		}
-
-		
 	}
 }

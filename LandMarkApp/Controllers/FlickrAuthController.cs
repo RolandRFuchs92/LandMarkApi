@@ -34,7 +34,7 @@ namespace LandMarkApp.Controllers
 			return Redirect(redirectUrl);
 		}
 
-	    public IActionResult OAuthVerifier(string resp)
+	    public IActionResult OAuthVerifier()
 	    {
 		    return Json(new {message = "Yay!"});
 	    }
