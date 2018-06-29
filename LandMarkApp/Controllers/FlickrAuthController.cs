@@ -11,6 +11,7 @@ using LandMarkAPI.Authentication;
 using LandMarkAPI.Domain.Models;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 
 namespace LandMarkApp.Controllers
@@ -36,7 +37,8 @@ namespace LandMarkApp.Controllers
 
 	    public IActionResult OAuthVerifier()
 	    {
-		    return Json(new {message = "Yay!"});
+			var queryString = new AuthorizationToken(_flickr).GetUserAfterAuth(Request.QueryString.ToString());
+			return View(new {message = queryString });
 	    }
 
         public IActionResult Index()

@@ -28,10 +28,12 @@ namespace LandMarkAPI.Authentication
 			    Method = "GET",
 			    SignatureMethod = OAuthSignatureMethod.HmacSha1,
 			    ConsumerKey = _flickr.ConsumerKey,
-			    ConsumerSecret = isRequestToken ? _flickr.ConsumerSecret : null,
+			    ConsumerSecret = _flickr.ConsumerSecret,
 			    RequestUrl = isRequestToken ?  _flickr.RequestTokenUrl : _flickr.AccessTokenUrl,
 			    SignatureTreatment = OAuthSignatureTreatment.Unescaped,
-			    CallbackUrl = isRequestToken ? "https://localhost:44301/FlickrAuth/OAuthVerifier" : null
+				Type = isRequestToken? OAuthRequestType.RequestToken : OAuthRequestType.AccessToken,
+			    CallbackUrl = isRequestToken ? "https://localhost:44301/FlickrAuth/OAuthVerifier" : null,
+				Version = "1.0"
 		    };
 
 		    return client;

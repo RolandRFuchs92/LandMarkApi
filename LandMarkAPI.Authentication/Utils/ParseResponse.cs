@@ -39,7 +39,18 @@ namespace LandMarkAPI.Authentication
 				flickr.AuthorizeUrl,
 				$"{flickr.RequestToken.Token}={token.Token}",
 		    };
+
 		    return string.Join("?",redirParts);
+	    }
+
+	    public OAuthToken ParseAuthResponse(string queryString)
+	    {
+		    var dic = queryString.Split("&").Select(i => i.Split("=")).ToArray();
+		    return new OAuthToken
+		    {
+				Token = dic[0][1].ToString(),
+				Verifier =  dic[1][1].ToString()
+			};
 	    }
     }
 }
