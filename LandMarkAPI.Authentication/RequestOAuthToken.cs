@@ -30,9 +30,7 @@ namespace LandMarkAPI.Authentication
 		public OAuthToken GetRequestToken()
 		{
 			var auth = GetClient().GetAuthorizationQuery();
-			var oAuthToken = GetAuthResponse(auth);
-
-			return new OAuthToken();
+			return GetAuthResponse(auth);
 		}
 
 		/// <summary>
@@ -49,7 +47,7 @@ namespace LandMarkAPI.Authentication
 				ConsumerSecret = _flickr.ConsumerSecret,
 				RequestUrl = _flickr.RequestTokenUrl,
 				SignatureTreatment = OAuthSignatureTreatment.Unescaped,
-				CallbackUrl = "rol@rol.com"
+				CallbackUrl = "https://localhost:44301/FlickrAuth/OAuthVerifier"
 			};
 
 			return client;
@@ -75,7 +73,7 @@ namespace LandMarkAPI.Authentication
 				var tokenParser = new ParseResponse();
 				var parsedResponse = tokenParser.ParseTokenConfirmationReponse(reader.ReadToEnd());
 				if (parsedResponse["oauth_callback_confirmed"].Any())
-					tokenParser.ParseDictToToken(parsedResponse);
+					token = tokenParser.ParseDictToToken(parsedResponse);
 			}
 
 			return token;

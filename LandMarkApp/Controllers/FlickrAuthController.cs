@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using OAuth;
 using LandMarkAPI.Authentication;
 using LandMarkAPI.Domain.Models;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 
 
@@ -24,9 +25,22 @@ namespace LandMarkApp.Controllers
 		    _flickr = new OAuthParamsRequestToken(iConfiguration);
 	    }
 
+	    public IActionResult BrowseLandmarks()
+	    {
+		    var token = new RequestOAuthToken(_flickr).GetRequestToken();
+
+			return Redirect(_flickr.AuthorizeUrl);
+		}
+
+	    public IActionResult OAuthVerifier(string resp)
+	    {
+
+		    return Json(new {message = "Yay!"});
+	    }
+
+
         public IActionResult Index()
         {
-	        var moo = new RequestOAuthToken(_flickr).GetRequestToken();
 			return View();
         }
     }

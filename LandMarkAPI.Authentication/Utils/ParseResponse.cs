@@ -15,7 +15,7 @@ namespace LandMarkAPI.Authentication
 		/// <returns></returns>
 	    public Dictionary<string,string> ParseTokenConfirmationReponse(string responseText)
 	    {
-		    return responseText.Split('&').ToDictionary(key => key.Split('=')[1], val => val.Split('=')[1]);
+		    return responseText.Split('&').ToDictionary(key => key.Split('=')[0], val => val.Split('=')[1]);
 	    }
 
 		/// <summary>
