@@ -20,4 +20,10 @@
     <ProjectReference Include="..\LandMarkAPI.Domain\LandMarkAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Design">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Design.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

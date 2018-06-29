@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.UI.Design;
 using LandMarkAPI.Domain.Models.OAuth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -28,8 +29,9 @@ namespace LandMarkApp.Controllers
 	    public IActionResult BrowseLandmarks()
 	    {
 		    var token = new RequestOAuthToken(_flickr).GetRequestToken();
+			var redir = new [] {_flickr.AuthorizeUrl, "" };
 
-			return Redirect(_flickr.AuthorizeUrl);
+			return Redirect(string.Join("&", redir));
 		}
 
 	    public IActionResult OAuthVerifier(string resp)
