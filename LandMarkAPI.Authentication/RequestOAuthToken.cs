@@ -11,14 +11,14 @@ using TinyOAuth1;
 
 namespace LandMarkAPI.Authentication
 {
-	public class OAuthAccess
+	public class RequestOAuthToken
 	{
 		private readonly OAuthParamsRequestToken _flickr;
 		/// <summary>
 		/// Constructor gets the its inforormation from appsettings(after being parsed)
 		/// </summary>
 		/// <param name="flickr"></param>
-		public OAuthAccess(OAuthParamsRequestToken flickr)
+		public RequestOAuthToken(OAuthParamsRequestToken flickr)
 		{
 			_flickr = flickr;
 		}
@@ -30,7 +30,7 @@ namespace LandMarkAPI.Authentication
 		public OAuthToken GetRequestToken()
 		{
 			var auth = GetClient().GetAuthorizationQuery();
-			var moo = GetAuthResponse(auth);
+			var oAuthToken = GetAuthResponse(auth);
 
 			return new OAuthToken();
 		}

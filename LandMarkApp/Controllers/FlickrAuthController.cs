@@ -26,7 +26,7 @@ namespace LandMarkApp.Controllers
 
         public IActionResult Index()
         {
-	        var moo = new OAuthAccess(_flickr).GetRequestToken();
+	        var moo = new RequestOAuthToken(_flickr).GetRequestToken();
 			return View();
         }
     }
