@@ -14,16 +14,21 @@ namespace LandMarkAPI.Authentication
 	public class OAuthAccess
 	{
 		private readonly OAuthParamsRequestToken _flickr;
-
+		/// <summary>
+		/// Constructor gets the its inforormation from appsettings(after being parsed)
+		/// </summary>
+		/// <param name="flickr"></param>
 		public OAuthAccess(OAuthParamsRequestToken flickr)
 		{
 			_flickr = flickr;
 		}
 
-
+		/// <summary>
+		/// Gets a populated OAuthToken
+		/// </summary>
+		/// <returns></returns>
 		public OAuthToken GetRequestToken()
 		{
-
 			var auth = GetClient().GetAuthorizationQuery();
 			var moo = GetAuthResponse(auth);
 
@@ -50,25 +55,32 @@ namespace LandMarkAPI.Authentication
 			return client;
 		}
 
+		/// <summary>
+		/// The a token key and secret with Auth query string
+		/// </summary>
+		/// <param name="auth"></param>
+		/// <returns></returns>
 		private OAuthToken GetAuthResponse(string auth)
 		{
 			var url = GetClient().RequestUrl + "?" + auth;
 			var request = (HttpWebRequest)WebRequest.Create(url);
 			var response = (HttpWebResponse)request.GetResponse();
+			var token = new OAuthToken();
 
 			WebHeaderCollection header = response.Headers;
 
 			var encoding = ASCIIEncoding.ASCII;
 			using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
 			{
-				string responseText = reader.ReadToEnd();
-
-
-				//break down response and use next.
+				var tokenParser = new ParseResponse();
+				var parsedResponse = tokenParser.ParseTokenConfirmationReponse(reader.ReadToEnd());
+				if (parsedResponse["oauth_callback_confirmed"].Any())
+					tokenParser.ParseDictToToken(parsedResponse);
 			}
 
-			return "";
+			return token;
 		}
 
+		
 	}
 }
