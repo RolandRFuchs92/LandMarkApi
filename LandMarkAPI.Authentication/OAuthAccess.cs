@@ -21,18 +21,20 @@ namespace LandMarkAPI.Authentication
 		}
 
 
-		public OAuthTokens GetRequestToken()
+		public OAuthToken GetRequestToken()
 		{
-			var client = GetClient();
-			client.CallbackUrl = "ro@ro.co";
-			var auth = client.GetAuthorizationQuery();
 
+			var auth = GetClient().GetAuthorizationQuery();
 			var moo = GetAuthResponse(auth);
 
-			return new OAuthTokens();
+			return new OAuthToken();
 		}
 
-		private OAuthRequest GetClient(bool addCallbackUrl = false)
+		/// <summary>
+		/// Get the client using the OAuthRequest Api
+		/// </summary>
+		/// <returns>The initial request client.</returns>
+		private OAuthRequest GetClient()
 		{
 			var client = new OAuthRequest
 			{
@@ -42,17 +44,15 @@ namespace LandMarkAPI.Authentication
 				ConsumerSecret = _flickr.ConsumerSecret,
 				RequestUrl = _flickr.RequestTokenUrl,
 				SignatureTreatment = OAuthSignatureTreatment.Unescaped,
-
+				CallbackUrl = "rol@rol.com"
 			};
-
-			client.CallbackUrl = addCallbackUrl ? "rol@rol.com" : null;
 
 			return client;
 		}
 
-		private string GetAuthResponse(string auth)
+		private OAuthToken GetAuthResponse(string auth)
 		{
-			var url = GetClient(true).RequestUrl + "?" + auth;
+			var url = GetClient().RequestUrl + "?" + auth;
 			var request = (HttpWebRequest)WebRequest.Create(url);
 			var response = (HttpWebResponse)request.GetResponse();
 
@@ -62,6 +62,8 @@ namespace LandMarkAPI.Authentication
 			using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
 			{
 				string responseText = reader.ReadToEnd();
+
+
 				//break down response and use next.
 			}
 
