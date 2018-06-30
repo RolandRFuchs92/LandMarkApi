@@ -7,7 +7,6 @@ using System.Web;
 using LandMarkAPI.Domain.Models.OAuth;
 using Microsoft.Extensions.Options;
 using OAuth;
-using TinyOAuth1;
 
 namespace LandMarkAPI.Authentication
 {
