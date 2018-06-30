@@ -7,7 +7,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0-preview1-final" />
-		<PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" pppVersion="2.1.0-preview1-final" />
+		<!--<PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" pppVersion="2.1.0-preview1-final" />-->
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-preview1-final" />
 		<PackageReference Include="OAuth.DotNetCore" Version="2.0.0" />
 	</ItemGroup>
@@ -17,11 +17,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview1-final" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0-preview1-final" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0-preview1-final" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.1.0-preview1-final" />
+		<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.1.0-preview1-final" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\LandMarkAPI.Authentication\LandMarkAPI.Authentication.csproj" />
+		<ProjectReference Include="..\LandMarkAPI.Data\LandMarkAPI.Data.csproj" />
 		<ProjectReference Include="..\LandMarkAPI.Domain\LandMarkAPI.Domain.csproj" />
 	</ItemGroup>
 
