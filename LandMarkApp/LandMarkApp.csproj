@@ -1,29 +1,28 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.1</TargetFramework>
+		<StartupObject>LandMarkApp.Program</StartupObject>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0-preview1-final" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0-preview1-final" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-preview1-final" />
-    <PackageReference Include="OAuth.DotNetCore" Version="2.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0-preview1-final" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" pppVersion="2.1.0-preview1-final" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-preview1-final" />
+		<PackageReference Include="OAuth.DotNetCore" Version="2.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.1.0-preview1-final" />
-  </ItemGroup>
+	<ItemGroup>
+		<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.1.0-preview1-final" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LandMarkAPI.Authentication\LandMarkAPI.Authentication.csproj" />
-    <ProjectReference Include="..\LandMarkAPI.Domain\LandMarkAPI.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.1.0-preview1-final" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="System.Design">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Design.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\LandMarkAPI.Authentication\LandMarkAPI.Authentication.csproj" />
+		<ProjectReference Include="..\LandMarkAPI.Domain\LandMarkAPI.Domain.csproj" />
+	</ItemGroup>
 
 </Project>
