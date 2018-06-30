@@ -30,8 +30,7 @@ namespace LandMarkAPI.Authentication
 		/// <returns></returns>
 		public OAuthToken GetRequestToken()
 		{
-			var auth = _client.GetClient().GetAuthorizationQuery();
-			return GetAuthResponse(auth);
+			return GetAuthResponse();
 		}
 
 		/// <summary>
@@ -39,9 +38,11 @@ namespace LandMarkAPI.Authentication
 		/// </summary>
 		/// <param name="auth"></param>
 		/// <returns></returns>
-		private OAuthToken GetAuthResponse(string auth)
+		private OAuthToken GetAuthResponse()
 		{
-			var url = _client.GetClient().RequestUrl + "?" + auth;
+			var client = _client.GetClient();
+			var auth = client.GetAuthorizationQuery();
+			var url = client.RequestUrl + "?" + auth;
 			var request = (HttpWebRequest)WebRequest.Create(url);
 			var response = (HttpWebResponse)request.GetResponse();
 			var token = new OAuthToken();

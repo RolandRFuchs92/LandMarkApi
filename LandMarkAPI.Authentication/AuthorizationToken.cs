@@ -20,12 +20,12 @@ namespace LandMarkAPI.Authentication
 		/// </summary>
 		/// <param name="token">Token from last request</param>
 		/// <returns></returns>
-	    public string GetUserAfterAuth(string authQueryString)
+	    public string GetUserAfterAuth(OAuthToken token)
 		{
-			var token = new ParseResponse().ParseAuthResponse(authQueryString);
-		    var client = _client.GetClient(false);
+			var client = _client.GetClient(false);
 		    client.Verifier = token.Verifier;
 		    client.Token = token.Token;
+			client.TokenSecret = token.TokenSecret;
 
 		    return GetResponse(client); ;
 	    }
