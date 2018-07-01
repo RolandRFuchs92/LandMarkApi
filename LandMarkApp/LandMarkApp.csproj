@@ -29,8 +29,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\LandMarkAPI.Authentication\LandMarkAPI.Authentication.csproj" />
-		<ProjectReference Include="..\LandMarkAPI.Data\LandMarkAPI.Data.csproj" />
 		<ProjectReference Include="..\LandMarkAPI.Domain\LandMarkAPI.Domain.csproj" />
+		<ProjectReference Include="..\LandMarkApi.Repository\LandMarkApi.Repository.csproj" />
 	</ItemGroup>
 
 </Project>

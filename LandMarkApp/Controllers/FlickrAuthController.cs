@@ -62,6 +62,15 @@ namespace LandMarkApp.Controllers
 			return View();
 		}
 
+		public IActionResult SaveFakePerson()
+		{
+			var queryString = "fullname=Jamal%20Fanaian&oauth_token=72157626318069415-087bfc7b5816092c&oauth_token_secret=a202d1f853ec69de&user_nsid=21207597%40N07&username=jamalfanaian";
+
+			var isSuccess = new LandMarkApi.Repository.PersonRepo().SavePersonFromQueryString(queryString);
+
+			return View();
+		}
+
 		/// <summary>
 		/// Get the clients Token details 
 		/// </summary>

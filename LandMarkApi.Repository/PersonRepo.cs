@@ -14,9 +14,10 @@ namespace LandMarkApi.Repository
 	{
 		private readonly LandMarkContext _db;
 
-		public PersonRepo(LandMarkContext db)
+		public PersonRepo()
 		{
-			_db = db;
+			///TODO: use the correct implementation of a factory.
+			_db = new LandMarkContextFactory().CreateDbContext();
 		}
 		public bool SavePersonFromQueryString(string successResponse)
 		{
@@ -27,6 +28,9 @@ namespace LandMarkApi.Repository
 				var person = ParseSuccessDictionaryToPerson(parseResponse);
 
 				_db.OAuths.Add(oauth);
+				_db.SaveChanges();
+
+				person.OAuthId = oauth.OAuthId;
 				_db.Users.Add(person);
 				_db.SaveChanges();
 
@@ -35,7 +39,6 @@ namespace LandMarkApi.Repository
 			catch (Exception e)
 			{
 				//Log error to db pl0x;
-
 				return false;
 			}
 
@@ -57,7 +60,7 @@ namespace LandMarkApi.Repository
 			return new User
 			{
 				UserName = fullName[0],
-				UserSurname = fullName[fullName.Length],
+				UserSurname = fullName[fullName.Length-1],
 				UserUsername = successResp["username"],
 				Usernsid = successResp["user_nsid"]
 			};
@@ -67,8 +70,10 @@ namespace LandMarkApi.Repository
 		{
 			return successResponse
 				.Split('&')
-				.ToDictionary(key => key.Split('=')[0], val => val.Split('=')[1]);
-
+				.ToDictionary(
+					key => key.Split('=')[0], 
+					val => val.Split('=')[1]
+					);
 		}
 	}
 }
