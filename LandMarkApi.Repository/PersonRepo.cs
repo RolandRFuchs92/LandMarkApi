@@ -53,15 +53,15 @@ namespace LandMarkApi.Repository
 			};
 		}
 
-		private User ParseSuccessDictionaryToPerson(Dictionary<string,string> successResp)
+		private Person ParseSuccessDictionaryToPerson(Dictionary<string,string> successResp)
 		{
 			var fullName = successResp["fullname"].Split("%20");
 
-			return new User
+			return new Person
 			{
-				UserName = fullName[0],
-				UserSurname = fullName[fullName.Length-1],
-				UserUsername = successResp["username"],
+				Name = fullName[0],
+				Surname = fullName[fullName.Length-1],
+				Username = successResp["username"],
 				Usernsid = successResp["user_nsid"]
 			};
 		}

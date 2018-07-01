@@ -13,7 +13,7 @@ namespace LandMarkAPI.Data
     {
 	    public LandMarkContext(DbContextOptions<LandMarkContext> options) : base(options){}
 
-		public DbSet<User> Users { get; set; }
+		public DbSet<Person> Users { get; set; }
 	    public DbSet<OAuth> OAuths { get; set; }
     }
 }

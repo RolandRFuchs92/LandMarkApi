@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandMarkAPI.Authentication"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandMarkApi.Repository", "LandMarkApi.Repository\LandMarkApi.Repository.csproj", "{A9E9615E-AE11-40B5-9494-927D59E9BA95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandMarkAPI", "LandMarkAPI\LandMarkAPI.csproj", "{BAF8DEDB-FC07-4BA8-A6F7-514751F9409E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{A9E9615E-AE11-40B5-9494-927D59E9BA95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E9615E-AE11-40B5-9494-927D59E9BA95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9E9615E-AE11-40B5-9494-927D59E9BA95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAF8DEDB-FC07-4BA8-A6F7-514751F9409E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAF8DEDB-FC07-4BA8-A6F7-514751F9409E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAF8DEDB-FC07-4BA8-A6F7-514751F9409E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAF8DEDB-FC07-4BA8-A6F7-514751F9409E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
