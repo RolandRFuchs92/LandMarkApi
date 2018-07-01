@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using OAuth;
 using LandMarkAPI.Authentication;
+using LandMarkAPI.Authentication.Utils;
 using LandMarkAPI.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Rewrite;
