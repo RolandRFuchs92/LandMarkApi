@@ -8,7 +8,16 @@
     <ProjectReference Include="..\LandMarkAPI.Domain\LandMarkAPI.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview1-final" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.1.0-preview1-final" />
+	</ItemGroup>	
+
+	<ItemGroup>
     <Reference Include="Microsoft.EntityFrameworkCore">
       <HintPath>..\..\..\..\.nuget\packages\microsoft.entityframeworkcore\2.1.0\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>

@@ -14,11 +14,15 @@ namespace LandMarkApp
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+	        BuildWebHost(args).Run();
+			//CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-    }
+		public static IWebHost BuildWebHost(string[] args) =>
+			WebHost.CreateDefaultBuilder(args)
+				//.ConfigureAppConfiguration(SetupConfiguration)
+				.UseStartup<Startup>()
+				.Build();
+
+	}
 }

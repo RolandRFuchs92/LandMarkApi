@@ -43,7 +43,7 @@ namespace LandMarkApp
 
 	        services.AddDbContext<LandMarkContext>(cfg =>
 	        {
-		        cfg.UseSqlServer(Configuration.GetConnectionString("SiteDb"), b => b.MigrationsAssembly("DataAccess"));
+		        cfg.UseSqlServer(Configuration.GetConnectionString("LandMarkContext"), b => b.MigrationsAssembly("DataAccess"));
 	        });
 
 			services.AddOptions();
