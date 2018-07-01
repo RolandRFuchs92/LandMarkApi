@@ -17,53 +17,66 @@ using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace LandMarkApp.Controllers
 {
-    public class FlickrAuthController : Controller
-    {
-	    private IConfiguration _iConfiguration;
-	    private OAuthParamsRequestToken _flickr;
-	    private IMemoryCache _cache;
-	    private static List<OAuthToken> _tokens = new List<OAuthToken>();
+	public class FlickrAuthController : Controller
+	{
+		private IConfiguration _iConfiguration;
+		private OAuthParamsRequestToken _flickr;
+		private IMemoryCache _cache;
+		private static List<OAuthToken> _tokens = new List<OAuthToken>();
 
 		public FlickrAuthController(IConfiguration iConfiguration, IMemoryCache memoryCache)
 		{
-		    _iConfiguration = iConfiguration;
-		    _flickr = new OAuthParamsRequestToken(iConfiguration);
-		    _cache = memoryCache;
+			_iConfiguration = iConfiguration;
+			_flickr = new OAuthParamsRequestToken(iConfiguration);
+			_cache = memoryCache;
 		}
 
-	    public IActionResult BrowseLandmarks()
-	    {
-		    var token = new RequestOAuthToken(_flickr).GetRequestToken();
+		/// <summary>
+		/// First redirect to the test page
+		/// </summary>
+		/// <returns></returns>
+		public IActionResult BrowseLandmarks()
+		{
+			var token = new RequestOAuthToken(_flickr).GetRequestToken();
 			_tokens.Add(token);
 
 			var redirectUrl = new ParseResponse().GetRedirectUrl(token, _flickr);
 			return Redirect(redirectUrl);
 		}
 
-	    public IActionResult OAuthVerifier()
-	    {
-		    var token = new ParseResponse().ParseAuthResponse(Request.QueryString.ToString());
-		    token = CollectUserToken(token);
+		/// <summary>
+		/// OAuthVerifier callback controller to hand incoming redirect from the client after app auth
+		/// </summary>
+		/// <returns></returns>
+		public IActionResult OAuthVerifier()
+		{
+			var token = new ParseResponse().ParseAuthResponse(Request.QueryString.ToString());
+			token = CollectUserToken(token);
 			var queryString = new AuthorizationToken(_flickr).GetUserAfterAuth(token);
 
-			return View(new {message = queryString });	
-	    }
+			return View(new { message = queryString });
+		}
 
-        public IActionResult Index()
-        {
+		public IActionResult Index()
+		{
 			return View();
-        }
+		}
 
-	    private OAuthToken CollectUserToken(OAuthToken token)
-	    {
-		    return (from t in _tokens
-			    where t.Token == token.Token
-			    select new OAuthToken
-			    {
-					Token = t.Token,
-					TokenSecret =  t.TokenSecret,
-					Verifier = token.Verifier
-			    }).FirstOrDefault();
-	    }
-    }
-}
+		/// <summary>
+		/// Get the clients Token details 
+		/// </summary>
+		/// <param name="token"></param>
+		/// <returns></returns>
+		private OAuthToken CollectUserToken(OAuthToken token)
+		{
+			return (from t in _tokens
+					where t.Token == token.Token
+					select new OAuthToken
+					{
+						Token = t.Token,
+						TokenSecret = t.TokenSecret,
+						Verifier = token.Verifier
+					}).FirstOrDefault();
+		}
+	}
+}	
