@@ -69,8 +69,9 @@ namespace LandMarkApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+	        app.UseAuthentication();
 
-            app.UseMvc(routes =>
+			app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
