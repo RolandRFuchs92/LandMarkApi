@@ -11,5 +11,9 @@ namespace LandMarkAPI.Domain.Entities.Person
 	    public string Username { get; set; }
 	    public string Usernsid { get; set; }
 	    public int OAuthId { get; set; }
+	    [MaxLength(100)]
+	    public string Email { get; set; }
+		[MaxLength(100)]
+	    public string Password { get; set; }
     }
 }

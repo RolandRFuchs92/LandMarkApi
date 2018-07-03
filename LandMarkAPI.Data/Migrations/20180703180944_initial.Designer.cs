@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 namespace LandMarkAPI.Data.Migrations
 {
     [DbContext(typeof(LandMarkContext))]
-    [Migration("20180701084207_Initial")]
-    partial class Initial
+    [Migration("20180703180944_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,22 +40,22 @@ namespace LandMarkAPI.Data.Migrations
                     b.ToTable("OAuths");
                 });
 
-            modelBuilder.Entity("LandMarkAPI.Domain.Entities.Person.User", b =>
+            modelBuilder.Entity("LandMarkAPI.Domain.Entities.Person.Person", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("PersonId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
 
                     b.Property<int>("OAuthId");
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("Surname");
 
-                    b.Property<string>("UserSurname");
-
-                    b.Property<string>("UserUsername");
+                    b.Property<string>("Username");
 
                     b.Property<string>("Usernsid");
 
-                    b.HasKey("UserId");
+                    b.HasKey("PersonId");
 
                     b.ToTable("Users");
                 });
