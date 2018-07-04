@@ -19,10 +19,13 @@ namespace LandMarkApi.Repository
 			///TODO: use the correct implementation of a factory.
 			_db = new LandMarkContextFactory().CreateDbContext();
 		}
-		public bool SavePersonFromQueryString(string successResponse)
+
+
+		public bool SavePersonFromQueryString(string successResponse, string identityNameRef)
 		{
 			try
 			{
+				//TODO: Comeback and fix entities again please
 				var parseResponse = ParseSuccessResponse(successResponse);
 				var oauth = ParseSuccessDictionaryToOAuth(parseResponse);
 				var person = ParseSuccessDictionaryToPerson(parseResponse);
@@ -32,6 +35,7 @@ namespace LandMarkApi.Repository
 
 				_db.Persons.Add(person);
 				person.OAuthId = oauth.OAuthId;
+				person.Email = identityNameRef;
 				_db.SaveChanges();
 
 				return true;

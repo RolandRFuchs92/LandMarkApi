@@ -47,7 +47,7 @@ namespace LandMarkApi.Controllers
 			token = CollectUserToken(token);
 			var successResponse = new AuthorizationToken(_flickr).GetUserAfterAuth(token);
 
-			if (new PersonRepo().SavePersonFromQueryString(successResponse))
+			if (new PersonRepo().SavePersonFromQueryString(successResponse, "moo@moo.com"))
 				ViewData["Message"] = "Your account has been linked!";
 			else
 				ViewData["Message"] = "There was an error linking your account.";

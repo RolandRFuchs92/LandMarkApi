@@ -10,7 +10,7 @@ namespace LandMarkApi.Controllers
     {
 	    public List<int> ListLocations(string where)
 	    {
-
+		    var user = this.User;
 
 		    return new List<int>();
 	    }
