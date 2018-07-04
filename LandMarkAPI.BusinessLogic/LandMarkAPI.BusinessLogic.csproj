@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LandMarkAPI.Authentication\LandMarkAPI.Authentication.csproj" />
+    <ProjectReference Include="..\LandMarkApi.Repository\LandMarkApi.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

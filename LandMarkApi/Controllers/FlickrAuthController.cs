@@ -13,15 +13,13 @@ namespace LandMarkApi.Controllers
 	public class FlickrAuthController : Controller
 	{
 		private IConfiguration _iConfiguration;
-		private OAuthParamsRequestToken _flickr;
-		private IMemoryCache _cache;
+		private readonly OAuthParamsRequestToken _flickr;
 		private static List<OAuthToken> _tokens = new List<OAuthToken>();
 
-		public FlickrAuthController(IConfiguration iConfiguration, IMemoryCache memoryCache)
+		public FlickrAuthController(IConfiguration iConfiguration)
 		{
 			_iConfiguration = iConfiguration;
 			_flickr = new OAuthParamsRequestToken(iConfiguration);
-			_cache = memoryCache;
 		}
 
 		/// <summary>
