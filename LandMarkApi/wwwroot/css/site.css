@@ -33,3 +33,8 @@
         display: none;
     }
 }
+
+.container.body-content {
+	margin-top : 25px;
+	margin-bottom: 25px;
+}

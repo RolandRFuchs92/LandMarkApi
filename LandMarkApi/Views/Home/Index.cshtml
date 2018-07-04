@@ -1,5 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
+
+<div class="panel panel-success">
+	<div class="panel-heading">Link to Flickr</div>
+	<div class="panel-body">
+		<h4>Click here to link your account to Flickr!</h4>
+		<a asp-controller="FlickrAuth" asp-action="LinkAccount" class="btn btn-primary">Link Account</a>
+	</div>
+</div>
 

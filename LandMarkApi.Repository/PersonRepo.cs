@@ -30,8 +30,8 @@ namespace LandMarkApi.Repository
 				_db.OAuths.Add(oauth);
 				_db.SaveChanges();
 
-				person.OAuthId = oauth.OAuthId;
 				_db.Persons.Add(person);
+				person.OAuthId = oauth.OAuthId;
 				_db.SaveChanges();
 
 				return true;

@@ -41,7 +41,7 @@ namespace LandMarkApi.Controllers
 		/// OAuthVerifier callback controller to hand incoming redirect from the client after app auth
 		/// </summary>
 		/// <returns></returns>
-		public IActionResult OAuthVerifier()
+		public IActionResult OAuthVerifier(string successResp)
 		{
 			var token = new ParseResponse().ParseAuthResponse(Request.QueryString.ToString());
 			token = CollectUserToken(token);
@@ -51,20 +51,6 @@ namespace LandMarkApi.Controllers
 				ViewData["Message"] = "Your account has been linked!";
 			else
 				ViewData["Message"] = "There was an error linking your account.";
-
-			return View();
-		}
-
-		public IActionResult Index()
-		{
-			return View();
-		}
-
-		public IActionResult SaveFakePerson()
-		{
-			var queryString = "fullname=Jamal%20Fanaian&oauth_token=72157626318069415-087bfc7b5816092c&oauth_token_secret=a202d1f853ec69de&user_nsid=21207597%40N07&username=jamalfanaian";
-
-			var isSuccess = new LandMarkApi.Repository.PersonRepo().SavePersonFromQueryString(queryString);
 
 			return View();
 		}

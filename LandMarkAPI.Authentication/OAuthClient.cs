@@ -32,7 +32,7 @@ namespace LandMarkAPI.Authentication
 			    RequestUrl = isRequestToken ?  _flickr.RequestTokenUrl : _flickr.AccessTokenUrl,
 			    SignatureTreatment = OAuthSignatureTreatment.Unescaped,
 				Type = isRequestToken? OAuthRequestType.RequestToken : OAuthRequestType.AccessToken,
-			    CallbackUrl = isRequestToken ? "https://localhost:44301/FlickrAuth/OAuthVerifier" : null,
+			    CallbackUrl = isRequestToken ? "https://localhost:44380/FlickrAuth/OAuthVerifier" : null,
 				Version = "1.0"
 		    };
 
