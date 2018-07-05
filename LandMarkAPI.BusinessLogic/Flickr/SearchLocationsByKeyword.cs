@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using LandMarkApi.Repository;
+using LandMarkApi.Repository.Flickr;
 using LandMarkAPI.Authentication;
 using LandMarkAPI.Authentication.Utils;
 using LandMarkAPI.BusinessLogic.Flickr;
@@ -24,18 +25,10 @@ namespace LandMarkAPI.BusinessLogic
 	    public SearchLocationsByKeyword(OAuthParamsRequestToken flickr, string idRef)
 	    {
 		    _flickr = flickr;
-		    var oauth = new OAuthRepo().GetOAuthToken(idRef);
-		    _client = new OAuthClient(flickr).GetClient();
-		    _client.Token = oauth.Token;
-		    _client.TokenSecret = oauth.TokenSecret;
-		    _client.RequestUrl = "https://api.flickr.com/services/rest";
-		    _client.CallbackUrl = null;
-		    _client.SignatureMethod = OAuthSignatureMethod.PlainText;
 	    }
 
 		public Dictionary<string, string> FindLocationByKeyword(string where)
 		{
-			//var url = "method=flickr.places.find&api_key=5eba472ef777bf46f17a03c62590fe6c&query=new+zealand&format=json&nojsoncallback=1";
 			var method = "flickr.places.find";
 			var paramDictionary = new Dictionary<string, string> {{ "query", where}};
 			var url = BuildRequestUrl(method, paramDictionary);
@@ -45,9 +38,13 @@ namespace LandMarkAPI.BusinessLogic
 
 			using (var reader = new System.IO.StreamReader(response.GetResponseStream()))
 			{
-				var data = new ParseFlickrResponse().ParseFlickrJsonResponse(reader.ReadToEnd());
-				
-				return
+				var dataString = reader.ReadToEnd();
+				var data = dataString.IndexOf($"\"stat\":\"fail\"") > 0 
+					?  new List<Place>()
+					: new ParseFlickrResponse().ParseFlickrJsonResponse(dataString);
+
+				new PlaceRepo().SavePlaceList(data);
+				return new Translate().GetPlaceDictionary();
 			}
 	    }
 		

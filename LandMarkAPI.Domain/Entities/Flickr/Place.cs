@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace LandMarkAPI.Domain.Entities.Flickr
 {
     public class Place
     {
+		[Key]
+	    public int PlaceId { get; set; }
 	    public string place_id { get; set; }
 	    public string woeid { get; set; }
 	    public double latitude { get; set; }
