@@ -16,7 +16,9 @@
 
 	function SubmitUserSelection(event) {
 		var data = $(event.currentTarget).serializeArray();
-		$.post(data, "")
+		$.post(data, "/ListLocation", function(data) {
+
+		});
 	}
 
 </script>

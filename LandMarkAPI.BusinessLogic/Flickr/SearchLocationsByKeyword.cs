@@ -21,8 +21,7 @@ namespace LandMarkAPI.BusinessLogic
 	    private readonly OAuthParamsRequestToken _flickr;
 	    private readonly OAuthRequest _client;
 
-
-	    public SearchLocationsByKeyword(OAuthParamsRequestToken flickr, string idRef)
+	    public SearchLocationsByKeyword(OAuthParamsRequestToken flickr)
 	    {
 		    _flickr = flickr;
 	    }
@@ -31,7 +30,7 @@ namespace LandMarkAPI.BusinessLogic
 		{
 			var method = "flickr.places.find";
 			var paramDictionary = new Dictionary<string, string> {{ "query", where}};
-			var url = BuildRequestUrl(method, paramDictionary);
+			var url = new UrlBuilder(_flickr).BuildRequestUrl(method, paramDictionary);
 
 			var request = (HttpWebRequest)WebRequest.Create(url);
 		    var response = (HttpWebResponse)request.GetResponse();
@@ -48,17 +47,6 @@ namespace LandMarkAPI.BusinessLogic
 			}
 	    }
 		
-	    private string BuildRequestUrl(string method, Dictionary<string, string> paramDictionary)
-	    {
-		    var paramList = (from q in paramDictionary
-								select $"{q.Key}={q.Value}");
-
-		    var paramString = string.Join("&", paramList);
-		    var baseURL = "https://api.flickr.com/services/rest/?";
-		    var additionalParams = "&per_page=10&format=json&nojsoncallback=1";
-
-
-			return $"{baseURL}method={method}&api_key={_flickr.ConsumerKey}&{paramString}{additionalParams}";
-	    }
+	  
     }
 }
