@@ -32,7 +32,7 @@ namespace LandMarkApi.Controllers
 
 	    public IActionResult GetImageList()
 	    {
-		    return "";
+		    return Json(new {message ="moo"});
 	    }
 
 	    public Dictionary<string, string> SearchLocationsBYKeyword(string where)
@@ -43,7 +43,7 @@ namespace LandMarkApi.Controllers
 	    private Dictionary<string, string> ListLocations(string where)
 	    {
 		    var idref = this.User.Claims.Select(i => i.Value).FirstOrDefault();
-		    var search = new SearchLocationsByKeyword(_flickr, idref);
+		    var search = new SearchLocationsByKeyword(_flickr);
 
 		    return search.FindLocationByKeyword(where);
 		}
