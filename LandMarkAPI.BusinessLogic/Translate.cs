@@ -18,7 +18,7 @@ namespace LandMarkAPI.BusinessLogic
 
 	    public Dictionary<string, string> GetPhotoDictionary()
 	    {
-			return new ImageRepo().GetAllImages().ToDictionary(key => key.PhotoId.ToString(), val => BuildImageUrlRef(val));
+			return new ImageRepo().GetAllImages().ToDictionary(key => key.id.ToString(), val => BuildImageUrlRef(val));
 		}
 
 	    private string BuildImageUrlRef(Photo photo)

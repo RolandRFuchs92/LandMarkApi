@@ -24,15 +24,15 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 	    public Dictionary<string, string> GetImageList(string locationId)
 	    {
 		    var location = new PlaceRepo().GetPlaceById(locationId);
-		    var lat = location.latitude.ToString("##.###");
-		    var lon = location.longitude.ToString("##.###");
+		    var lat = location.latitude.ToString().Replace(",",".");
+		    var lon = location.longitude.ToString().Replace(",", ".");
 
 		    return GetImageListByLatLon(lat, lon);
 	    }
 
 	    private Dictionary<string, string> GetImageListByLatLon(string lat, string lon)
 	    {
-		    var method = "flickr.photos.geo.photosForLocation";
+		    var method = "flickr.photos.search";
 		    var paramDictionary = new Dictionary<string, string>
 		    {
 			    { "lat", lat.ToString() },

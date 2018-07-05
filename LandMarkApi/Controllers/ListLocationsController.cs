@@ -36,9 +36,9 @@ namespace LandMarkApi.Controllers
 		    return Json( ListPhotosByLonLat(locationId) );
 	    }
 
-	    public Dictionary<string, string> GetImageListByLocationId(string locationId)
+	    public Dictionary<string, string> GetImageListByLocationId(string place_id)
 	    {
-		    return ListPhotosByLonLat(locationId);
+		    return ListPhotosByLonLat(place_id);
 	    }
 
 		public Dictionary<string, string> SearchLocationsBYKeyword(string where)
@@ -52,9 +52,9 @@ namespace LandMarkApi.Controllers
 		    return search.FindLocationByKeyword(where);
 		}
 
-	    private Dictionary<string, string> ListPhotosByLonLat(string locationId)
+	    private Dictionary<string, string> ListPhotosByLonLat(string place_id)
 	    {
-			return new GetImageListForLocation(_flickr).GetImageList(locationId);
+			return new GetImageListForLocation(_flickr).GetImageList(place_id);
 		}
 	}
 }
