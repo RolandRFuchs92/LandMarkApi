@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LandMarkAPI.BusinessLogic;
+using LandMarkAPI.BusinessLogic.Flickr;
 using LandMarkAPI.Domain.Models.OAuth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -42,10 +43,17 @@ namespace LandMarkApi.Controllers
 
 	    private Dictionary<string, string> ListLocations(string where)
 	    {
-		    var idref = this.User.Claims.Select(i => i.Value).FirstOrDefault();
+		    //var idref = this.User.Claims.Select(i => i.Value).FirstOrDefault();
 		    var search = new SearchLocationsByKeyword(_flickr);
 
 		    return search.FindLocationByKeyword(where);
 		}
+
+	    private Dictionary<string, string> ListPhotosByLonLat(int lon, int lat)
+	    {
+		    var phtos = new GetImageListForLocation(_flickr);
+
+			return new Dictionary<string, string>();
+	    }
 	}
 }

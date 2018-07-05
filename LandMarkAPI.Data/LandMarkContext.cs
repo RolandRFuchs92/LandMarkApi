@@ -18,5 +18,6 @@ namespace LandMarkAPI.Data
 		public DbSet<Person> Persons { get; set; }
 	    public DbSet<OAuth> OAuths { get; set; }
 	    public DbSet<Place> Places { get; set; }
+	    public DbSet<Photo> Photos { get; set; }
     }
 }

@@ -13,9 +13,14 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 {
     public class ParseFlickrResponse
     {
-	    public List<Place> ParseFlickrJsonResponse(string FlickrResponse)
+	    public List<Place> ParseFlickrJsonResponse(string flickrResponse)
 	    {
-		    return JsonConvert.DeserializeObject<Location>(FlickrResponse).places.place;
+		    return JsonConvert.DeserializeObject<Location>(flickrResponse).places.place;
+	    }
+
+	    public List<Photo> ParsePhotoJson(string flickrResponse)
+	    {
+		    return JsonConvert.DeserializeObject<Photos>(flickrResponse).photos.Photo;
 	    }
     }
 }

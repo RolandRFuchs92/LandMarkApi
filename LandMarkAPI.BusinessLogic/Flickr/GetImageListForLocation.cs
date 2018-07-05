@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using LandMarkApi.Repository;
 using LandMarkApi.Repository.Flickr;
 using LandMarkAPI.Domain.Entities.Flickr;
 using LandMarkAPI.Domain.Models.OAuth;
@@ -13,9 +14,9 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 {
     public class GetImageListForLocation
     {
-	    private OAuthParamsRequestToken _flickr;
+	    private readonly OAuthParamsRequestToken _flickr;
 
-	    public GetImageListForLocation(OAuthParamsRequestToken flickr, string idRef)
+	    public GetImageListForLocation(OAuthParamsRequestToken flickr)
 		{
 			_flickr = flickr;
 		}
@@ -26,7 +27,8 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 		    var paramDictionary = new Dictionary<string, string>
 		    {
 			    { "lat", lat.ToString() },
-			    { "lon", lon.ToString() }
+			    { "lon", lon.ToString() },
+			    { "per_page", "10" }
 		    };
 		    var url = new UrlBuilder(_flickr).BuildRequestUrl(method, paramDictionary);
 
@@ -37,10 +39,10 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 		    {
 			    var dataString = reader.ReadToEnd();
 			    var data = dataString.IndexOf($"\"stat\":\"fail\"") > 0
-				    ? new List<Place>()
-				    : new ParseFlickrResponse().ParseFlickrJsonResponse(dataString);
+				    ? new List<Photo>()
+				    : new ParseFlickrResponse().ParsePhotoJson(dataString);//running out of time, but would use dynamic type setter
 
-			    new PlaceRepo().SavePlaceList(data);
+			    new ImageRepo().SaveImageList(data);
 			    return new Translate().GetPlaceDictionary();
 			}
 	    }
