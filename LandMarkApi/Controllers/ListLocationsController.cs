@@ -22,6 +22,7 @@ namespace LandMarkApi.Controllers
 
 	    public List<int> ListLocations(string where)
 	    {
+		    where = "durban";
 		    var idref = this.User.Claims.Select(i => i.Value).FirstOrDefault();
 		    var moo = new SearchLocationsByKeyword(_flickr, idref);
 		    var doo = moo.FindLocationByKeyword(where);
