@@ -1,0 +1,22 @@
+﻿@model Dictionary<string, string>
+
+
+
+<form action="/" method="post">
+	<select class="control-label" name="placeId">
+		@foreach (var item in Model)
+		{
+			<option value="@item.Key ">@item.Value</option>
+		}
+	</select>
+
+</form>
+
+<script>
+
+	function SubmitUserSelection(event) {
+		var data = $(event.currentTarget).serializeArray();
+		$.post(data, "")
+	}
+
+</script>
