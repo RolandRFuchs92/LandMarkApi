@@ -21,7 +21,16 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 			_flickr = flickr;
 		}
 
-	    public Dictionary<string, string> GetImageList(int lon, int lat)
+	    public Dictionary<string, string> GetImageList(string locationId)
+	    {
+		    var location = new PlaceRepo().GetPlaceById(locationId);
+		    var lat = location.latitude.ToString("##.###");
+		    var lon = location.longitude.ToString("##.###");
+
+		    return GetImageListByLatLon(lat, lon);
+	    }
+
+	    private Dictionary<string, string> GetImageListByLatLon(string lat, string lon)
 	    {
 		    var method = "flickr.photos.geo.photosForLocation";
 		    var paramDictionary = new Dictionary<string, string>
@@ -43,8 +52,9 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 				    : new ParseFlickrResponse().ParsePhotoJson(dataString);//running out of time, but would use dynamic type setter
 
 			    new ImageRepo().SaveImageList(data);
-			    return new Translate().GetPlaceDictionary();
-			}
-	    }
+			    return new Translate().GetPhotoDictionary();
+		    }
+
+		}
 	}
 }

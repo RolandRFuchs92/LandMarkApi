@@ -31,29 +31,30 @@ namespace LandMarkApi.Controllers
 		    return PartialView("_KeywordResult");
 	    }
 
-	    public IActionResult GetImageList()
+	    public IActionResult GetImageList(string locationId)
 	    {
-		    return Json(new {message ="moo"});
+		    return Json( ListPhotosByLonLat(locationId) );
 	    }
 
-	    public Dictionary<string, string> SearchLocationsBYKeyword(string where)
+	    public Dictionary<string, string> GetImageListByLocationId(string locationId)
+	    {
+		    return ListPhotosByLonLat(locationId);
+	    }
+
+		public Dictionary<string, string> SearchLocationsBYKeyword(string where)
 	    {
 		    return ListLocations(where);
 	    }
 
 	    private Dictionary<string, string> ListLocations(string where)
 	    {
-		    //var idref = this.User.Claims.Select(i => i.Value).FirstOrDefault();
 		    var search = new SearchLocationsByKeyword(_flickr);
-
 		    return search.FindLocationByKeyword(where);
 		}
 
-	    private Dictionary<string, string> ListPhotosByLonLat(int lon, int lat)
+	    private Dictionary<string, string> ListPhotosByLonLat(string locationId)
 	    {
-		    var phtos = new GetImageListForLocation(_flickr);
-
-			return new Dictionary<string, string>();
-	    }
+			return new GetImageListForLocation(_flickr).GetImageList(locationId);
+		}
 	}
 }
