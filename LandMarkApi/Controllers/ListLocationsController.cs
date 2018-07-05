@@ -20,14 +20,12 @@ namespace LandMarkApi.Controllers
 		    _flickr = new OAuthParamsRequestToken(config);
 		}
 
-	    public List<int> ListLocations(string where)
+	    public Dictionary<string, string> ListLocations(string where)
 	    {
-		    where = "durban";
 		    var idref = this.User.Claims.Select(i => i.Value).FirstOrDefault();
-		    var moo = new SearchLocationsByKeyword(_flickr, idref);
-		    var doo = moo.FindLocationByKeyword(where);
+		    var search = new SearchLocationsByKeyword(_flickr, idref);
 
-			return new List<int>();
+			return search.FindLocationByKeyword(where); ;
 	    }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LandMarkAPI.Domain.Entities.Auth;
+using LandMarkAPI.Domain.Entities.Flickr;
 using LandMarkAPI.Domain.Entities.Person;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,5 +17,6 @@ namespace LandMarkAPI.Data
 
 		public DbSet<Person> Persons { get; set; }
 	    public DbSet<OAuth> OAuths { get; set; }
+	    public DbSet<Place> Places { get; set; }
     }
 }

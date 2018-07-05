@@ -8,6 +8,8 @@ using System.Text;
 using LandMarkApi.Repository;
 using LandMarkAPI.Authentication;
 using LandMarkAPI.Authentication.Utils;
+using LandMarkAPI.BusinessLogic.Flickr;
+using LandMarkAPI.Domain.Entities.Flickr;
 using LandMarkAPI.Domain.Models.OAuth;
 using OAuth;
 
@@ -31,7 +33,7 @@ namespace LandMarkAPI.BusinessLogic
 		    _client.SignatureMethod = OAuthSignatureMethod.PlainText;
 	    }
 
-		public string FindLocationByKeyword(string where)
+		public Dictionary<string, string> FindLocationByKeyword(string where)
 		{
 			//var url = "method=flickr.places.find&api_key=5eba472ef777bf46f17a03c62590fe6c&query=new+zealand&format=json&nojsoncallback=1";
 			var method = "flickr.places.find";
@@ -43,7 +45,9 @@ namespace LandMarkAPI.BusinessLogic
 
 			using (var reader = new System.IO.StreamReader(response.GetResponseStream()))
 			{
-				return reader.ReadToEnd();
+				var data = new ParseFlickrResponse().ParseFlickrJsonResponse(reader.ReadToEnd());
+				
+				return
 			}
 	    }
 		
