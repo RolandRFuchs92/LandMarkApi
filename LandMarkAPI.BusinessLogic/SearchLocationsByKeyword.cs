@@ -38,18 +38,13 @@ namespace LandMarkAPI.BusinessLogic
 			var paramDictionary = new Dictionary<string, string> {{ "query", where}};
 			var url = BuildRequestUrl(method, paramDictionary);
 
-
 			var request = (HttpWebRequest)WebRequest.Create(url);
 		    var response = (HttpWebResponse)request.GetResponse();
-		    var data = "";
 
 			using (var reader = new System.IO.StreamReader(response.GetResponseStream()))
 			{
-				data = reader.ReadToEnd();
+				return reader.ReadToEnd();
 			}
-
-
-			return "";
 	    }
 		
 	    private string BuildRequestUrl(string method, Dictionary<string, string> paramDictionary)
