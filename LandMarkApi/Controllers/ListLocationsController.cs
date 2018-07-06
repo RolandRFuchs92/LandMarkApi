@@ -51,7 +51,7 @@ namespace LandMarkApi.Controllers
 
 	    private Dictionary<string, string> ListPhotosByLonLat(string place_id)
 	    {
-			return new GetImageListForLocation(_flickr).GetImageList(place_id);
+			return new GetPhotosListForLocation(_flickr).GetImageList(place_id);
 		}
 	}
 }

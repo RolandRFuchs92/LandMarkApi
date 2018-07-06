@@ -24,7 +24,6 @@ namespace LandMarkApi.Repository.Flickr
 			    _db.PhotoDetails.Add(photoDetail);
 			    _db.SaveChanges();
 
-
 			    return true;
 		    }
 		    catch (Exception e)

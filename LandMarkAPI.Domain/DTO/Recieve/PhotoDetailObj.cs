@@ -16,7 +16,7 @@ namespace LandMarkAPI.Domain.DTO.Recieve
 		public int farm { get; set; }
 		public int dateuploaded { get; set; }
 		public bool isfavorite { get; set; }
-		public bool license { get; set; }
+		public int license { get; set; }
 		public int safety_level { get; set; }
 		public int rotation { get; set; }
 		public string originalsecret { get; set; }

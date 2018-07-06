@@ -12,11 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace LandMarkAPI.BusinessLogic.Flickr
 {
-    public class GetImageListForLocation
+    public class GetPhotosListForLocation
     {
 	    private readonly OAuthParamsRequestToken _flickr;
 
-	    public GetImageListForLocation(OAuthParamsRequestToken flickr)
+	    public GetPhotosListForLocation(OAuthParamsRequestToken flickr)
 		{
 			_flickr = flickr;
 		}
