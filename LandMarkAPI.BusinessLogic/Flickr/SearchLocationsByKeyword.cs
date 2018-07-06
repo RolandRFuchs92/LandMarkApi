@@ -19,7 +19,6 @@ namespace LandMarkAPI.BusinessLogic
     public class SearchLocationsByKeyword
     {
 	    private readonly OAuthParamsRequestToken _flickr;
-	    private readonly OAuthRequest _client;
 
 	    public SearchLocationsByKeyword(OAuthParamsRequestToken flickr)
 	    {

@@ -42,7 +42,7 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 			    var dataString = reader.ReadToEnd();
 			    var data = dataString.IndexOf($"\"stat\":\"fail\"") > 0
 				    ? new PhotoDetail()
-				    : new ParseFlickrResponse().ParsePhotoDetails(dataString);//running out of time, but would use dynamic type setter
+				    : new ParseFlickrResponse().ParsePhotoDetails(dataString);
 
 			    new PhotoDetailRepo().SaveImageDetails(data);
 			    return new Translate().GetPhotoDictionary();
