@@ -27,7 +27,7 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 
 	    private PhotoDetail RequestPhotoDetails(long flickrPhotoId)
 	    {
-		    var method = "flickr.photos.search";
+		    var method = "flickr.photos.getInfo";
 		    var paramDictionary = new Dictionary<string, string>
 		    {
 			    { "photo_id", flickrPhotoId.ToString() }

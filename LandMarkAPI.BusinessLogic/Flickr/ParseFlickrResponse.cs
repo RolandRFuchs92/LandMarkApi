@@ -26,23 +26,23 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 
 	    public PhotoDetail ParsePhotoDetails(string flickrResponse)
 	    {
-		    var photoDetailsRaw = JsonConvert.DeserializeObject<PhotoDetailObj>(flickrResponse);
+		    var photoDetailsRaw = JsonConvert.DeserializeObject<PhotoContainer>(flickrResponse);
 		    return new PhotoDetail
 		    {
-				FlickrPhotoId = photoDetailsRaw.id,
+				FlickrPhotoId = photoDetailsRaw.photo.id,
 				DateUploaded = null,//photoDetailsRaw.dateuploaded,
-				Decription = photoDetailsRaw.description._content,
-				Title = photoDetailsRaw.title._content,
-				Farm =  photoDetailsRaw.farm,
-				IsFavorite =  photoDetailsRaw.isfavorite,
-				License =  photoDetailsRaw.license,
-				Media = photoDetailsRaw.media,
-				OriginalFormat = photoDetailsRaw.originalformat,
-				OriginalSecret = photoDetailsRaw.originalsecret,
-				Rotation = photoDetailsRaw.rotation,
-				Secret = photoDetailsRaw.secret,
-				Server = photoDetailsRaw.server,
-				Views = photoDetailsRaw.views
+				Decription = photoDetailsRaw.photo.description._content,
+				Title = photoDetailsRaw.photo.title._content,
+				Farm =  photoDetailsRaw.photo.farm,
+				IsFavorite =  photoDetailsRaw.photo.isfavorite,
+				License =  photoDetailsRaw.photo.license,
+				Media = photoDetailsRaw.photo.media,
+				OriginalFormat = photoDetailsRaw.photo.originalformat,
+				OriginalSecret = photoDetailsRaw.photo.originalsecret,
+				Rotation = photoDetailsRaw.photo.rotation,
+				Secret = photoDetailsRaw.photo.secret,
+				Server = photoDetailsRaw.photo.server,
+				Views = photoDetailsRaw.photo.views
 		    };
 	    }
     }

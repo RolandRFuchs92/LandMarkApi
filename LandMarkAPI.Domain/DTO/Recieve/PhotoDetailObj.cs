@@ -4,7 +4,7 @@ namespace LandMarkAPI.Domain.DTO.Recieve
 {
     public class PhotoContainer
     {
-	    public Photo Photo { get; set; }
+	    public PhotoDetailObj photo { get; set; }
 	    public string stat { get; set; }
     }
 

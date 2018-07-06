@@ -18,7 +18,6 @@ namespace LandMarkApi.Controllers
 		    _flickr = new OAuthParamsRequestToken(config);
 	    }
 
-
 		public IActionResult GetImageDetail(long flickrPhotoId)
 		{
 			var imageDetails = new GetPhotoDetails(_flickr).GetDetails(flickrPhotoId);

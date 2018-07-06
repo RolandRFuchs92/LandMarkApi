@@ -12,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 namespace LandMarkAPI.Data.Migrations
 {
     [DbContext(typeof(LandMarkContext))]
-    partial class LandMarkContextModelSnapshot : ModelSnapshot
+    [Migration("20180706052803_AddedPhotoDetails")]
+    partial class AddedPhotoDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
