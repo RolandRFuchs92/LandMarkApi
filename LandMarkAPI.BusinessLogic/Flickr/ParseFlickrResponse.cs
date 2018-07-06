@@ -22,5 +22,10 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 	    {
 		    return JsonConvert.DeserializeObject<Photos>(flickrResponse).photos.Photo;
 	    }
+
+	    public PhotoDetail ParsePhotoDetails(string flickrResponse)
+	    {
+			return new PhotoDetail();
+	    }
     }
 }

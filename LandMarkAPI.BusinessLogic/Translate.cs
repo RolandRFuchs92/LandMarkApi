@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LandMarkApi.Repository;
 using LandMarkApi.Repository.Flickr;
+using LandMarkAPI.BusinessLogic.Flickr;
 using LandMarkAPI.Domain.Entities.Flickr;
 
 namespace LandMarkAPI.BusinessLogic
@@ -20,6 +21,11 @@ namespace LandMarkAPI.BusinessLogic
 	    {
 			return new ImageRepo().GetAllImages().ToDictionary(key => key.id.ToString(), val => BuildImageUrlRef(val));
 		}
+
+	    public PhotoDetail GetPhotoDetail()
+	    {
+			return new PhotoDetail();
+	    }
 
 	    private string BuildImageUrlRef(Photo photo)
 	    {

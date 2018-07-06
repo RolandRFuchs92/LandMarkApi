@@ -13,7 +13,7 @@ namespace LandMarkAPI.Domain.Entities.Flickr
 	    public string stat { get; set; }
     }
 
-	public class PhotoDetail
+	public class PhotoDetailObj
 	{
 		public int id { get; set; }
 		public string secret { get; set; }
