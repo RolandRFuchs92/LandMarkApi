@@ -10,7 +10,7 @@ namespace LandMarkAPI.Domain.DTO.Recieve
 
 	public class PhotoDetailObj
 	{
-		public int id { get; set; }
+		public string id { get; set; }
 		public string secret { get; set; }
 		public int server { get; set; }
 		public int farm { get; set; }

@@ -29,7 +29,7 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 		    var photoDetailsRaw = JsonConvert.DeserializeObject<PhotoContainer>(flickrResponse);
 		    return new PhotoDetail
 		    {
-				FlickrPhotoId = photoDetailsRaw.photo.id,
+				FlickrPhotoId = Convert.ToInt64(photoDetailsRaw.photo.id),
 				DateUploaded = null,//photoDetailsRaw.dateuploaded,
 				Decription = photoDetailsRaw.photo.description._content,
 				Title = photoDetailsRaw.photo.title._content,
