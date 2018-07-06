@@ -17,7 +17,6 @@ namespace LandMarkApi.Repository
 		    _db = new LandMarkContextFactory().CreateDbContext();
 	    }
 
-
 	    public bool SaveImageList(List<Photo> photos)
 	    {
 		    try

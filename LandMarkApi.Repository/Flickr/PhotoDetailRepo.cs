@@ -19,7 +19,23 @@ namespace LandMarkApi.Repository.Flickr
 
 	    public bool SaveImageDetails(PhotoDetail photoDetail)
 	    {
-		    return false;
+		    try
+		    {
+			    _db.PhotoDetails.Add(photoDetail);
+			    _db.SaveChanges();
+
+
+			    return true;
+		    }
+		    catch (Exception e)
+		    {
+			    return false;
+		    }
+	    }
+
+	    public PhotoDetail GetPhotoDetail(long photoId)
+	    {
+		    return _db.PhotoDetails.FirstOrDefault(i => i.FlickrPhotoId == photoId);
 	    }
 
 	}

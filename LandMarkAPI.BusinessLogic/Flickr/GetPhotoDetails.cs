@@ -11,30 +11,26 @@ using LandMarkAPI.Domain.Models.OAuth;
 
 namespace LandMarkAPI.BusinessLogic.Flickr
 {
-    public class GetImageDetail
+    public class GetPhotoDetails
     {
 		private readonly OAuthParamsRequestToken _flickr;
 
-	    public GetImageDetail(OAuthParamsRequestToken flickr)
+	    public GetPhotoDetails(OAuthParamsRequestToken flickr)
 	    {
 		    _flickr = flickr;
 	    }
 
-	    public Dictionary<string, string> GetImageList(string locationId)
+	    public Dictionary<string, string> GetImageList(long FlickrPhotoId)
 	    {
-		    var location = new PhotoDetailRepo().GetPlaceById(locationId);
-		    var lat = location.latitude.ToString().Replace(",", ".");
-		    var lon = location.longitude.ToString().Replace(",", ".");
-
-		    return GetImageListByLatLon(lat, lon);
+		    return GetDetails(FlickrPhotoId);
 	    }
 
-	    private Dictionary<string, string> GetImageListByLatLon(long photo_id)
+	    private Dictionary<string, string> GetDetails(long photoDetail)
 	    {
 		    var method = "flickr.photos.search";
 		    var paramDictionary = new Dictionary<string, string>
 		    {
-			    { "lat", photo_id.ToString() }
+			    { "ImagePhotoId", photoDetail.ToString() }
 		    };
 		    var url = new UrlBuilder(_flickr).BuildRequestUrl(method, paramDictionary);
 
