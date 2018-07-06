@@ -20,17 +20,17 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 		    _flickr = flickr;
 	    }
 
-	    public PhotoDetail GetDetails(long FlickrPhotoId)
+	    public PhotoDetail GetDetails(long flickrPhotoId)
 	    {
-		    return RequestPhotoDetails(FlickrPhotoId);
+		    return RequestPhotoDetails(flickrPhotoId);
 	    }
 
-	    private PhotoDetail RequestPhotoDetails(long FlickrPhotoId)
+	    private PhotoDetail RequestPhotoDetails(long flickrPhotoId)
 	    {
 		    var method = "flickr.photos.search";
 		    var paramDictionary = new Dictionary<string, string>
 		    {
-			    { "photo_id", FlickrPhotoId.ToString() }
+			    { "photo_id", flickrPhotoId.ToString() }
 		    };
 		    var url = new UrlBuilder(_flickr).BuildRequestUrl(method, paramDictionary);
 
@@ -45,7 +45,7 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 				    : new ParseFlickrResponse().ParsePhotoDetails(dataString);
 
 			    new PhotoDetailRepo().SaveImageDetails(data);
-			    return new Translate().GetPhotoDetail();
+			    return new Translate().GetPhotoDetail(flickrPhotoId);
 		    }
 
 	    }

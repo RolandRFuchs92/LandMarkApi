@@ -22,9 +22,9 @@ namespace LandMarkAPI.BusinessLogic
 			return new ImageRepo().GetAllImages().ToDictionary(key => key.id.ToString(), val => BuildImageUrlRef(val));
 		}
 
-	    public PhotoDetail GetPhotoDetail()
+	    public PhotoDetail GetPhotoDetail(long flickrPhotoId)
 	    {
-			return new PhotoDetail();
+		    return new PhotoDetailRepo().GetPhotoDetail(flickrPhotoId);
 	    }
 
 	    private string BuildImageUrlRef(Photo photo)
