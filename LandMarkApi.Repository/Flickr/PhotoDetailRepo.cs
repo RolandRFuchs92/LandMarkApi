@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.Data;
 using LandMarkAPI.Domain.Entities.Flickr;
 
 namespace LandMarkApi.Repository.Flickr
 {
-    public class PhotoDetailRepo
-    {
+    public class PhotoDetailRepo : IPhotoDetailRepo
+	{
 		private readonly LandMarkContext _db;
 
 	    public PhotoDetailRepo()

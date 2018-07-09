@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LandMarkApi.Repository;
 using LandMarkApi.Repository.Flickr;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.Domain.Entities.Flickr;
 using LandMarkAPI.Domain.Models.OAuth;
 
@@ -14,10 +15,12 @@ namespace LandMarkAPI.BusinessLogic.Flickr
     public class GetPhotoDetails
     {
 		private readonly OAuthParamsRequestToken _flickr;
+	    private readonly IPhotoDetailRepo _photoDetailRepo;
 
-	    public GetPhotoDetails(OAuthParamsRequestToken flickr)
+	    public GetPhotoDetails(OAuthParamsRequestToken flickr, IPhotoDetailRepo _photoDetailRepo)
 	    {
 		    _flickr = flickr;
+		    this._photoDetailRepo = _photoDetailRepo;
 	    }
 
 	    public PhotoDetail GetDetails(long flickrPhotoId)
@@ -44,7 +47,7 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 				    ? new PhotoDetail()
 				    : new ParseFlickrResponse().ParsePhotoDetails(dataString);
 
-			    new PhotoDetailRepo().SaveImageDetails(data);
+			    _photoDetailRepo.SaveImageDetails(data);
 			    return new Translate().GetPhotoDetail(flickrPhotoId);
 		    }
 

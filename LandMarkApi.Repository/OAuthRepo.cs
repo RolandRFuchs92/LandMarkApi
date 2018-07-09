@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.Data;
 using LandMarkAPI.Domain.Models.OAuth;
 
 namespace LandMarkApi.Repository
 {
-    public class OAuthRepo
-    {
+    public class OAuthRepo : IOAuthRepo
+	{
 	    private readonly LandMarkContext _db;
 
 		public OAuthRepo()

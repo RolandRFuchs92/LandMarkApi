@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Channels;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.Data;
 using LandMarkAPI.Domain.Entities.Auth;
 using LandMarkAPI.Domain.Entities.Person;
@@ -10,14 +11,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LandMarkApi.Repository
 {
-	public class PersonRepo
+	public class PersonRepo : IPersonRepo
 	{
 		private readonly LandMarkContext _db;
 
-		public PersonRepo()
+		public PersonRepo(LandMarkContext db)
 		{
-			///TODO: use the correct implementation of a factory.
-			_db = new LandMarkContextFactory().CreateDbContext();
+			_db = db;
 		}
 
 
