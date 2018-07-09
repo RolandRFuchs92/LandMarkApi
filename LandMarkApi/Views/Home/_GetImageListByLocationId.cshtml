@@ -1,0 +1,34 @@
+﻿
+
+<h4><b>/ListLocations/GetImageListByLocationId?</b></h4>
+<blockquote>
+	<ul>
+		<li>
+			Params<br />
+			place_id(string) eg ?place_id=zEO6RdNTWr7plXg.rQ<br />
+			place_id would be the key value of one of the rows in "SearchlocationsByKeyword" endpoint
+		</li>
+		<li>
+			Description<br />
+			To get the list of images from the flickr server based on the key returned from one of the keys retrieved from your initial request. if you use ?place_id=zEO6RdNTWr7plXg.rQ you will get 10 images from that location (japan in this example)
+		</li>
+		<li>
+			Result<br />
+<pre>
+{
+	"8695808553": "https://farm9.staticflickr.com/8254/8695808553_bf51a2892c.jpg",
+	"40942324990": "https://farm1.staticflickr.com/880/40942324990_826c294b0b.jpg",
+	"40942323030": "https://farm2.staticflickr.com/1725/40942323030_765f647a67.jpg",
+	"28879612718": "https://farm2.staticflickr.com/1737/28879612718_58de59cd7f.jpg",
+	"28879609578": "https://farm2.staticflickr.com/1735/28879609578_8b6a6be418.jpg",
+	"28879608208": "https://farm1.staticflickr.com/899/28879608208_13fb4b7c2e.jpg",
+	"28879605548": "https://farm2.staticflickr.com/1728/28879605548_97941bc52e.jpg",
+	"28879603778": "https://farm1.staticflickr.com/875/28879603778_2cb4309440.jpg",
+	"27532858257": "https://farm2.staticflickr.com/1749/27532858257_6d3612e1ba.jpg",
+	"27532857657": "https://farm2.staticflickr.com/1750/27532857657_2aa79ca097.jpg",
+	"42559410961": "https://farm2.staticflickr.com/1747/42559410961_21bd429fdc.jpg"
+}
+</pre>
+		</li>
+	</ul>
+</blockquote>

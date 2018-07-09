@@ -47,8 +47,6 @@ namespace LandMarkAPI.Authentication
 			var response = (HttpWebResponse)request.GetResponse();
 			var token = new OAuthToken();
 
-			WebHeaderCollection header = response.Headers;
-
 			var encoding = ASCIIEncoding.ASCII;
 			using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
 			{
