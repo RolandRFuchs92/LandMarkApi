@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.BusinessLogic;
 using LandMarkAPI.BusinessLogic.Flickr;
 using LandMarkAPI.Domain.Models.OAuth;
@@ -13,11 +14,15 @@ namespace LandMarkApi.Controllers
     public class ListLocationsController : Controller
     {
 	    private readonly IConfiguration _config;
+	    private readonly IImageRepo _imageRepo;
+	    private readonly IPlaceRepo _placeRepo;
 	    private OAuthParamsRequestToken _flickr;
 
-	    public ListLocationsController(IConfiguration config)
+	    public ListLocationsController(IConfiguration config, IImageRepo imageRepo, IPlaceRepo placeRepo)
 	    {
 		    _config = config;
+		    _imageRepo = imageRepo;
+		    _placeRepo = placeRepo;
 		    _flickr = new OAuthParamsRequestToken(config);
 		}
 
@@ -45,13 +50,13 @@ namespace LandMarkApi.Controllers
 
 	    private Dictionary<string, string> ListLocations(string where)
 	    {
-		    var search = new SearchLocationsByKeyword(_flickr);
+		    var search = new SearchLocationsByKeyword(_flickr, _placeRepo);
 		    return search.FindLocationByKeyword(where);
 		}
 
 	    private Dictionary<string, string> ListPhotosByLonLat(string place_id)
 	    {
-			return new GetPhotosListForLocation(_flickr).GetImageList(place_id);
+			return new GetPhotosListForLocation(_flickr, _imageRepo).GetImageList(place_id);
 		}
 	}
 }

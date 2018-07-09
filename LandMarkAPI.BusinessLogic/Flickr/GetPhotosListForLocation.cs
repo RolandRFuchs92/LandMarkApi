@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LandMarkApi.Repository;
 using LandMarkApi.Repository.Flickr;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.Domain.Entities.Flickr;
 using LandMarkAPI.Domain.Models.OAuth;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -15,11 +16,13 @@ namespace LandMarkAPI.BusinessLogic.Flickr
     public class GetPhotosListForLocation
     {
 	    private readonly OAuthParamsRequestToken _flickr;
+	    private readonly IImageRepo _imageRepo;
 
-	    public GetPhotosListForLocation(OAuthParamsRequestToken flickr)
-		{
-			_flickr = flickr;
-		}
+	    public GetPhotosListForLocation(OAuthParamsRequestToken flickr, IImageRepo imageRepo)
+	    {
+		    _flickr = flickr;
+		    _imageRepo = imageRepo;
+	    }
 
 	    public Dictionary<string, string> GetImageList(string locationId)
 	    {
@@ -51,7 +54,7 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 				    ? new List<Photo>()
 				    : new ParseFlickrResponse().ParsePhotoJson(dataString);//running out of time, but would use dynamic type setter
 
-			    new ImageRepo().SaveImageList(data);
+			    _imageRepo.SaveImageList(data);
 			    return new Translate().GetPhotoDictionary();
 		    }
 

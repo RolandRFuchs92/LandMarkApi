@@ -12,6 +12,11 @@ namespace LandMarkAPI.BusinessLogic
 {
     public class Translate
     {
+	    public Translate()
+	    {
+		    
+	    }
+
 	    public Dictionary<string, string> GetPlaceDictionary()
 	    {
 			return new PlaceRepo().GetAllPlaces().ToDictionary(key => key.place_id, val => val._content);

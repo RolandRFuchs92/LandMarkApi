@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using LandMarkApi.Repository;
 using LandMarkApi.Repository.Flickr;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.Authentication;
 using LandMarkAPI.Authentication.Utils;
 using LandMarkAPI.BusinessLogic.Flickr;
@@ -19,10 +20,12 @@ namespace LandMarkAPI.BusinessLogic
     public class SearchLocationsByKeyword
     {
 	    private readonly OAuthParamsRequestToken _flickr;
+	    private readonly IPlaceRepo _iPlaceRepo;
 
-	    public SearchLocationsByKeyword(OAuthParamsRequestToken flickr)
+	    public SearchLocationsByKeyword(OAuthParamsRequestToken flickr, IPlaceRepo iPlaceRepo)
 	    {
 		    _flickr = flickr;
+		    _iPlaceRepo = iPlaceRepo;
 	    }
 
 		public Dictionary<string, string> FindLocationByKeyword(string where)
@@ -41,7 +44,7 @@ namespace LandMarkAPI.BusinessLogic
 					?  new List<Place>()
 					: new ParseFlickrResponse().ParseFlickrJsonResponse(dataString);
 
-				new PlaceRepo().SavePlaceList(data);
+				_iPlaceRepo.SavePlaceList(data);
 				return new Translate().GetPlaceDictionary();
 			}
 	    }
