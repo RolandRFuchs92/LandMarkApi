@@ -48,7 +48,7 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 				    : new ParseFlickrResponse().ParsePhotoDetails(dataString);
 
 			    _photoDetailRepo.SaveImageDetails(data);
-			    return new Translate().GetPhotoDetail(flickrPhotoId);
+			    return new Translate().GetPhotoDetail(flickrPhotoId, _photoDetailRepo);
 		    }
 
 	    }

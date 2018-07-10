@@ -20,12 +20,12 @@ namespace LandMarkAPI.BusinessLogic
     public class SearchLocationsByKeyword
     {
 	    private readonly OAuthParamsRequestToken _flickr;
-	    private readonly IPlaceRepo _iPlaceRepo;
+	    private readonly IPlaceRepo _placeRepo;
 
-	    public SearchLocationsByKeyword(OAuthParamsRequestToken flickr, IPlaceRepo iPlaceRepo)
+	    public SearchLocationsByKeyword(OAuthParamsRequestToken flickr, IPlaceRepo placeRepo)
 	    {
 		    _flickr = flickr;
-		    _iPlaceRepo = iPlaceRepo;
+			_placeRepo = placeRepo;
 	    }
 
 		public Dictionary<string, string> FindLocationByKeyword(string where)
@@ -44,8 +44,8 @@ namespace LandMarkAPI.BusinessLogic
 					?  new List<Place>()
 					: new ParseFlickrResponse().ParseFlickrJsonResponse(dataString);
 
-				_iPlaceRepo.SavePlaceList(data);
-				return new Translate().GetPlaceDictionary();
+				_placeRepo.SavePlaceList(data);
+				return new Translate().GetPlaceDictionary(_placeRepo);
 			}
 	    }
 		

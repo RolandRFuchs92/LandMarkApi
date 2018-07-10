@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using LandMarkApi.Repository;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.Authentication;
 using LandMarkAPI.Authentication.Utils;
 using LandMarkAPI.Domain.Models.OAuth;
@@ -13,12 +14,14 @@ namespace LandMarkApi.Controllers
 	public class FlickrAuthController : Controller
 	{
 		private IConfiguration _iConfiguration;
+		private readonly IPersonRepo _personRepo;
 		private readonly OAuthParamsRequestToken _flickr;
 		private static List<OAuthToken> _tokens = new List<OAuthToken>();
 
-		public FlickrAuthController(IConfiguration iConfiguration)
+		public FlickrAuthController(IConfiguration iConfiguration, IPersonRepo personRepo)
 		{
 			_iConfiguration = iConfiguration;
+			_personRepo = personRepo;
 			_flickr = new OAuthParamsRequestToken(iConfiguration);
 		}
 
@@ -45,7 +48,7 @@ namespace LandMarkApi.Controllers
 			token = CollectUserToken(token);
 			var successResponse = new AuthorizationToken(_flickr).GetUserAfterAuth(token);
 
-			if (new PersonRepo().SavePersonFromQueryString(successResponse, "moo@moo.com"))
+			if (_personRepo.SavePersonFromQueryString(successResponse, "moo@moo.com"))
 				ViewData["Message"] = "Your account has been linked!";
 			else
 				ViewData["Message"] = "There was an error linking your account.";

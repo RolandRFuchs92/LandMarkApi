@@ -55,7 +55,7 @@ namespace LandMarkAPI.BusinessLogic.Flickr
 				    : new ParseFlickrResponse().ParsePhotoJson(dataString);//running out of time, but would use dynamic type setter
 
 			    _imageRepo.SaveImageList(data);
-			    return new Translate().GetPhotoDictionary();
+			    return new Translate().GetPhotoDictionary(_imageRepo);
 		    }
 
 		}

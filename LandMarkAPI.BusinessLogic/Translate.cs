@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LandMarkApi.Repository;
 using LandMarkApi.Repository.Flickr;
+using LandMarkApi.Repository.Interfaces;
 using LandMarkAPI.BusinessLogic.Flickr;
 using LandMarkAPI.Domain.Entities.Flickr;
 
@@ -12,24 +13,19 @@ namespace LandMarkAPI.BusinessLogic
 {
     public class Translate
     {
-	    public Translate()
+	    public Dictionary<string, string> GetPlaceDictionary(IPlaceRepo placeRepo)
 	    {
-		    
+			return placeRepo.GetAllPlaces().ToDictionary(key => key.place_id, val => val._content);
 	    }
 
-	    public Dictionary<string, string> GetPlaceDictionary()
+	    public Dictionary<string, string> GetPhotoDictionary(IImageRepo imageRepo)
 	    {
-			return new PlaceRepo().GetAllPlaces().ToDictionary(key => key.place_id, val => val._content);
-	    }
-
-	    public Dictionary<string, string> GetPhotoDictionary()
-	    {
-			return new ImageRepo().GetAllImages().ToDictionary(key => key.id.ToString(), val => BuildImageUrlRef(val));
+			return imageRepo.GetAllImages().ToDictionary(key => key.id.ToString(), val => BuildImageUrlRef(val));
 		}
 
-	    public PhotoDetail GetPhotoDetail(long flickrPhotoId)
+	    public PhotoDetail GetPhotoDetail(long flickrPhotoId, IPhotoDetailRepo photoDetailRepo)
 	    {
-		    return new PhotoDetailRepo().GetPhotoDetail(flickrPhotoId);
+		    return photoDetailRepo.GetPhotoDetail(flickrPhotoId);
 	    }
 
 	    private string BuildImageUrlRef(Photo photo)
