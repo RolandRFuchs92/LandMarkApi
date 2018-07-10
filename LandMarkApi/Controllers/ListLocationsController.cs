@@ -36,8 +36,6 @@ namespace LandMarkApi.Controllers
 		    return PartialView("_KeywordResult");
 	    }
 
-		
-
 	    public Dictionary<string, string> GetImageListByLocationId(string place_id)
 	    {
 		    return ListPhotosByLonLat(place_id);
