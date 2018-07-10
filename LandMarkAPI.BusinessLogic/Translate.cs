@@ -15,7 +15,8 @@ namespace LandMarkAPI.BusinessLogic
     {
 	    public Dictionary<string, string> GetPlaceDictionary(IPlaceRepo placeRepo)
 	    {
-			return placeRepo.GetAllPlaces().ToDictionary(key => key.place_id, val => val._content);
+		    var list = placeRepo.GetAllPlaces().Select(i => new { i.place_id, i._content}).Distinct();
+			return list.ToDictionary(key => key.place_id, val => val._content);
 	    }
 
 	    public Dictionary<string, string> GetPhotoDictionary(IImageRepo imageRepo)

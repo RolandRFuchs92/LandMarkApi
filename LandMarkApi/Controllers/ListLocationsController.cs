@@ -16,7 +16,7 @@ namespace LandMarkApi.Controllers
 	    private readonly IConfiguration _config;
 	    private readonly IImageRepo _imageRepo;
 	    private readonly IPlaceRepo _placeRepo;
-	    private OAuthParamsRequestToken _flickr;
+	    private readonly OAuthParamsRequestToken _flickr;
 
 	    public ListLocationsController(IConfiguration config, IImageRepo imageRepo, IPlaceRepo placeRepo)
 	    {
@@ -36,14 +36,14 @@ namespace LandMarkApi.Controllers
 		    return PartialView("_KeywordResult");
 	    }
 
-	    public Dictionary<string, string> GetImageListByLocationId(string place_id)
+	    public IActionResult GetImageListByLocationId(string place_id)
 	    {
-		    return ListPhotosByLonLat(place_id);
+		    return Ok(ListPhotosByLonLat(place_id));
 	    }
 
-		public Dictionary<string, string> SearchLocationsBYKeyword(string where)
+		public IActionResult SearchLocationsBYKeyword(string where)
 	    {
-		    return ListLocations(where);
+		    return Ok(ListLocations(where));
 	    }
 
 	    private Dictionary<string, string> ListLocations(string where)
@@ -54,7 +54,7 @@ namespace LandMarkApi.Controllers
 
 	    private Dictionary<string, string> ListPhotosByLonLat(string place_id)
 	    {
-			return new GetPhotosListForLocation(_flickr, _imageRepo).GetImageList(place_id);
+			return new GetPhotosListForLocation(_flickr, _imageRepo, _placeRepo).GetImageList(place_id);
 		}
 	}
 }

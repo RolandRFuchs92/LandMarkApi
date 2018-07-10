@@ -11,9 +11,9 @@ namespace LandMarkApi.Repository.Flickr
 	{
 		private readonly LandMarkContext _db;
 
-	    public ImageRepo()
+	    public ImageRepo(LandMarkContext db)
 	    {
-		    _db = new LandMarkContextFactory().CreateDbContext();
+		    _db = db;
 	    }
 
 	    public bool SaveImageList(List<Photo> photos)

@@ -17,16 +17,18 @@ namespace LandMarkAPI.BusinessLogic.Flickr
     {
 	    private readonly OAuthParamsRequestToken _flickr;
 	    private readonly IImageRepo _imageRepo;
+	    private readonly IPlaceRepo _placeRepo;
 
-	    public GetPhotosListForLocation(OAuthParamsRequestToken flickr, IImageRepo imageRepo)
+	    public GetPhotosListForLocation(OAuthParamsRequestToken flickr, IImageRepo imageRepo, IPlaceRepo placeRepo)
 	    {
 		    _flickr = flickr;
 		    _imageRepo = imageRepo;
+		    _placeRepo = placeRepo;
 	    }
 
 	    public Dictionary<string, string> GetImageList(string locationId)
 	    {
-		    var location = new PlaceRepo().GetPlaceById(locationId);
+		    var location = _placeRepo.GetPlaceById(locationId);
 		    var lat = location.latitude.ToString().Replace(",",".");
 		    var lon = location.longitude.ToString().Replace(",", ".");
 

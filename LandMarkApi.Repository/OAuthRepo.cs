@@ -13,9 +13,9 @@ namespace LandMarkApi.Repository
 	{
 	    private readonly LandMarkContext _db;
 
-		public OAuthRepo()
+		public OAuthRepo(LandMarkContext db)
 	    {
-			_db = new LandMarkContextFactory().CreateDbContext();
+			_db = db;
 		}
 
 		public OAuthToken GetOAuthToken(string identityNameRef)
