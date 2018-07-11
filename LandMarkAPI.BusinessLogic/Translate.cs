@@ -11,28 +11,35 @@ using LandMarkAPI.Domain.Entities.Flickr;
 
 namespace LandMarkAPI.BusinessLogic
 {
-    public class Translate
-    {
-	    public Dictionary<string, string> GetPlaceDictionary(IPlaceRepo placeRepo)
-	    {
-		    var list = placeRepo.GetAllPlaces().Select(i => new { i.place_id, i._content}).Distinct();
+	public class Translate
+	{
+		public Dictionary<string, string> GetPlaceDictionary(IPlaceRepo placeRepo)
+		{
+			var list = placeRepo.GetAllPlaces().Select(i => new { i.place_id, i._content }).Distinct();
 			return list.ToDictionary(key => key.place_id, val => val._content);
-	    }
-
-	    public Dictionary<string, string> GetPhotoDictionary(IImageRepo imageRepo)
-	    {
-			return imageRepo.GetAllImages().ToDictionary(key => key.id.ToString(), val => BuildImageUrlRef(val));
 		}
 
-	    public PhotoDetail GetPhotoDetail(long flickrPhotoId, IPhotoDetailRepo photoDetailRepo)
-	    {
-		    return photoDetailRepo.GetPhotoDetail(flickrPhotoId);
-	    }
+		public Dictionary<string, string> GetPhotoDictionary(IImageRepo imageRepo)
+		{
+			var list = (from image in imageRepo.GetAllImages().ToList()
+						group image by new
+						{
+							image.id
+						} into grp
+						select grp.First()).ToDictionary(i=> i.id.ToString(), k => BuildImageUrlRef(k));
 
-	    private string BuildImageUrlRef(Photo photo)
-	    {
-		    var baseUrl = $"https://farm{photo.farm}.staticflickr.com";
-		    return $"{baseUrl}/{photo.server}/{photo.id}_{photo.secret}.jpg";
-	    }
-    }
+			return list;
+		}
+
+		public PhotoDetail GetPhotoDetail(long flickrPhotoId, IPhotoDetailRepo photoDetailRepo)
+		{
+			return photoDetailRepo.GetPhotoDetail(flickrPhotoId);
+		}
+
+		private string BuildImageUrlRef(Photo photo)
+		{
+			var baseUrl = $"https://farm{photo.farm}.staticflickr.com";
+			return $"{baseUrl}/{photo.server}/{photo.id}_{photo.secret}.jpg";
+		}
+	}
 }
